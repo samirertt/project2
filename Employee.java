@@ -35,13 +35,10 @@ abstract class Employee
     //getters and setters
     public int getEmployeeId()
     {
-        return 1;
+        return employeeId;
     }
 
-    public String getRole() {
-        // Default implementation
-        return "Employee";
-    }
+    public abstract String getRole();
 
     public void setEmployeeId(int employeeId) 
     {
