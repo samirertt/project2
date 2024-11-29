@@ -13,7 +13,11 @@ public class sortingAlgorithms
     {
         this.dataset = data;
     }
-
+    /**
+     * Finds the maximum value in the given array
+     * @param unsigned the array to find the maximum value
+     * @return the maximum value in the array
+     */
     public int maxOfArray(int[] unsigned) 
     {
         int max = this.dataset[0];
@@ -24,7 +28,11 @@ public class sortingAlgorithms
         }
         return max;
     }
-
+    /**
+     * Sorts the array with the Radix Sort algorithm.
+     * Separates the numbers in the dataset into signed and unsigned.
+     * Sorts them separately and then combines them into a single sorted array
+     */
     public void radixSort() 
     {
         int[] signed = new int[this.dataset.length];
@@ -63,7 +71,11 @@ public class sortingAlgorithms
 
         this.dataset = sortedArray;
     }
-
+    /**
+     * Sorts the given array using the Count Sort algorithm according to the specified digit base.
+     * @param array to be sorted
+     * @param base the digit base used for sorting
+     */
     public void countSort(int[] array, int base) 
     {
         int n = array.length;
@@ -89,7 +101,12 @@ public class sortingAlgorithms
 
         System.arraycopy(calc, 0, array, 0, n);
     }
-
+    /**
+     * Sorts the dataset using the Shell Sort algorithm.
+     * Allows items that are far apart to be exchange
+     * Reduces the total number of comparisons
+     * @return the sorted array
+     */
     public int[] shellSort() 
     {
         for (int gap = this.dataset.length / 2; gap > 0; gap /= 2) {
@@ -106,7 +123,12 @@ public class sortingAlgorithms
         }
         return this.dataset;
     }
-
+    /**
+     * Sorts the dataset using the Heap Sort algorithm.
+     * Heap Sort creates a maximum heap from the dataset
+     * Repeatedly removes the max element to create a sorted array.
+     * @return the sorted array.
+     */
     public int[] heapSort() 
     {
     
@@ -121,7 +143,13 @@ public class sortingAlgorithms
     
         return this.dataset;
     }
-    
+    /**
+     * If the given element exists, it compares it with two sub-elements
+     * If one of the sub-elements is greater, the data is changed.
+     * @param array representing the heap.
+     * @param size the size of the heap
+     * @param index position of the element to be checked and adjusted
+     */
     private void heapify(int[] array, int size, int index) 
     {
         int largest = index; 
@@ -141,14 +169,24 @@ public class sortingAlgorithms
             heapify(array, size, largest);
         }
     }
-    
+    /**
+     * Swaps two elements in the heap
+     * @param array representing the heap
+     * @param i the index of the first element to swap
+     * @param j the index of the second element to swap
+     */
     private void swapHeap(int[] array, int i, int j)
     {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
-
+    /**
+     * Sorts the dataset using the Insertion Sort algorithm
+     * Compares the elements in the dataset
+     * if a smaller element is found, the two elements are swapped
+     * @return the sorted array.
+     */
     public int[] insertionSort() 
     {
         for (int i = 1; i < this.dataset.length; i++) {
@@ -160,14 +198,23 @@ public class sortingAlgorithms
         }
         return this.dataset;
     }
-
+    /**
+     * Swaps two elements in the data set for the Insertion Sort algorithm.
+     * @param i the index of the first element to swap
+     * @param j the index of the second element to swap
+     */
     private void swapInsertion(int i, int j) 
     {
         int temp = this.dataset[i];
         this.dataset[i] = this.dataset[j];
         this.dataset[j] = temp;
     }
-
+    /**
+     * Measures the execution time of the Radix Sort algorithm.
+     * execution time is measured in seconds
+     * @param sort an object of the `sortingAlgorithms`
+     * @return time taken to execute the Radix Sort algorithm
+     */
     private static double measureradixSort(sortingAlgorithms sort) 
     {
         long startSortingTime = System.nanoTime();
@@ -175,7 +222,12 @@ public class sortingAlgorithms
         long endSortingTime = System.nanoTime();
         return (double) (endSortingTime - startSortingTime) / 1_000_000_000;
     }
-
+    /**
+     * Measures the execution time of the Shell Sort algorithm
+     * execution time is measured in seconds
+     * @param sort an object of the `sortingAlgorithms`
+     * @return the time taken to execute the Shell Sort algorithm
+     */
     private static double measureshellSort(sortingAlgorithms sort) 
     {
         long startSortingTime = System.nanoTime();
@@ -183,7 +235,12 @@ public class sortingAlgorithms
         long endSortingTime = System.nanoTime();
         return (double) (endSortingTime - startSortingTime) / 1_000_000_000;
     }
-
+     /**
+     * Measures the execution time of the Heap Sort algorithm
+     * execution time is measured in seconds
+     * @param sort an object of the `sortingAlgorithms`
+     * @return the time taken to execute the Heap Sort algorithm
+     */
     private static double measureheapSort(sortingAlgorithms sort) 
     {
         long startSortingTime = System.nanoTime();
@@ -191,7 +248,12 @@ public class sortingAlgorithms
         long endSortingTime = System.nanoTime();
         return (double) (endSortingTime - startSortingTime) / 1_000_000_000;
     }
-
+    /**
+     * Measures the execution time of the Insertion Sort algorithm in seconds.
+     * execution time is measured in seconds
+     * @param sort an object of the `sortingAlgorithms`
+     * @return the time taken to execute the Insertion Sort algorithm
+     */
     private static double measureInsertionSort(sortingAlgorithms sort) 
     {
         long startSortingTime = System.nanoTime();
@@ -199,7 +261,12 @@ public class sortingAlgorithms
         long endSortingTime = System.nanoTime();
         return (double) (endSortingTime - startSortingTime) / 1_000_000_000;
     }
-
+    /**
+     *Checks the accuracy of a sorted dataset by comparing it with a reference sorted version of the original dataset
+     * @param originalDataset the original unsorted dataset
+     * @param sortedDataset the dataset sorted by a custom sorting algorithm
+     * @return true if the sortedDataset matches the reference sorted array, false otherwise
+     */
     public static boolean sortComparator(int[] originalDataset, int[] sortedDataset) 
     {
         ArrayList<Integer> list = new ArrayList<>();
