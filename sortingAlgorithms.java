@@ -5,10 +5,19 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * This class includes methods to initialize the dataset,
+ * Finds the maximum value in an array
+ * Sorts the dataset using the Radix Sort algorithm
+ */
 public class sortingAlgorithms 
 {
     private int[] dataset;
 
+    /**
+     * Constructor to initialize the dataset.
+     * @param data the array of integers to be sorted
+     */
     public sortingAlgorithms(int[] data) 
     {
         this.dataset = data;
