@@ -290,6 +290,65 @@ public class sortingAlgorithms
         return Arrays.equals(referenceArray, sortedDataset);
     }
 
+    private static void updateCSV(Connection connection, String csvFile) {
+        String columnName = csvFile.replace(".csv", "");
+        String insertSQL = """
+            INSERT INTO SortedArrays (`Index`, %s)
+            VALUES (?, ?)
+            ON DUPLICATE KEY UPDATE %s = VALUES(%s); """.formatted(columnName, columnName, columnName);
+    
+        try {
+            File file = new File(csvFile);
+            if (!file.exists()) {
+                System.err.println("File does not exist: " + csvFile);
+                return;
+            }
+            if (!file.canRead()) {
+                System.err.println("Cannot read the file: " + csvFile);
+                return;
+            }
+    
+            System.out.println("Reading file: " + csvFile);
+            
+            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+                String line = reader.readLine(); 
+                
+                if (line == null) {
+                    System.err.println("File is empty: " + csvFile);
+                    return;
+                }
+    
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (parts.length < 2) {
+                        System.err.println("Skipping line: " + line);
+                        continue;
+                    }
+    
+                    try {
+                        int index = Integer.parseInt(parts[0].trim());  
+                        int value = Integer.parseInt(parts[1].trim());  
+    
+                        try (PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
+                            preparedStatement.setInt(1, index);
+                            preparedStatement.setInt(2, value);
+                            preparedStatement.addBatch(); 
+                        }
+                    } catch (NumberFormatException e) {
+                        System.err.println("Skipping line due to invalid number format: " + line);
+                    }
+                }
+    
+                connection.prepareStatement(insertSQL).executeBatch();
+                System.out.println("Data from " + csvFile + " successfully imported.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file " + csvFile + ": " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Database error while processing " + csvFile + ": " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) 
     {
         try (Scanner userInput = new Scanner(System.in)) {
@@ -353,6 +412,20 @@ public class sortingAlgorithms
                     (arraySize <= 13 ? Arrays.toString(insertionSort.dataset) : Arrays.toString(Arrays.copyOf(insertionSort.dataset, 13)) + " ..."));
             System.out.println("Time taken to sort using Insertion Sort: " + insertionSortTime + " seconds");
             System.out.println("Insertion Sort Comparison: " + (sortComparator(randomArray, insertionSort.dataset) ? "CORRECT" : "INCORRECT"));
+
+            String[] csvFiles = { "RadixSort.csv", "ShellSort.csv", "HeapSort.csv", "InsertionSort.csv" };
+    
+            try (Connection conn = DriverManager.getConnection(DB_URL)) {
+                System.out.println("Connected to MySQL database!");
+            
+                for (String csvFile : csvFiles) {
+                    updateCSV(conn, csvFile);
+                }
+            
+                System.out.println("Data successfully imported into the database.");
+            } catch (SQLException e) {
+                System.err.println("Database error: " + e.getMessage());
+            }
         }
     }
 }
