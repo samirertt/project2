@@ -611,7 +611,10 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
-    
+    /**
+    * Fetches and displays all usernames from the `non_profile` table.
+    *Prints a list of usernames retrieved from the database.
+    */
     public static void getUsernames(){
         String sql_query = "SELECT username FROM non_profile";
 
