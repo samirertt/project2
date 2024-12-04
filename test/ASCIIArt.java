@@ -1,6 +1,11 @@
 package test;
 
 public class ASCIIArt{
+    /**
+ * Displays an ASCII art introduction for the project with various colored sections.
+ * The output includes the project name and group members' names in different colors 
+ * using ANSI escape codes. The result is printed to the console.
+ */
     public static void display_Proj_intro() {
         image3();
         System.out.println("\033[1;34m");
@@ -59,7 +64,11 @@ public class ASCIIArt{
         
     }
 
-        
+    /**
+ * Displays a welcome message with ASCII art in blue using ANSI escape codes.
+ * The output consists of two sections of stylized text that introduce the project.
+ * The related message is printed to the console.
+ */  
     public static void display_welcome_msg() {
         System.out.println("\033[1;34m");
         System.err.println("██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ \r\n" + //
@@ -78,6 +87,10 @@ public class ASCIIArt{
 
     }
 
+    /**
+ * Displays a success message with ASCII art in green using ANSI escape codes.
+ * Related message is printed to the console.
+ */
     public static void display_success_msg()
     {
         System.out.println("\033[1;32m");
@@ -88,6 +101,11 @@ public class ASCIIArt{
                            "███████  ██████   ██████  ██ ██   ████     ███████  ██████   ██████  ██████ ███████ ███████ ███████ ██       ██████  ███████ ███████");
 
     }
+
+    /**
+ * Displays an error message with ASCII art in green using ANSI escape codes.
+ * Related message is printed to the console.
+ */
     public static void display_error_msg()
     {
         System.out.println("\033[1;31m");
@@ -98,7 +116,11 @@ public class ASCIIArt{
                            "███████ ██   ██ ██   ██  ██████  ██   ██ ██");
 
     }
-    
+
+     /**
+ * Displays the failure message with ASCII art in green using ANSI escape codes.
+ * Related message is printed to the console.
+ */
     public static void display_Fail_msg()
     {
         System.out.println("\033[1;31m");
@@ -110,6 +132,10 @@ public class ASCIIArt{
 
     }
 
+    /**
+ * Displays a logout message with ASCII art in green using ANSI escape codes.
+ * The related message is printed to the console.
+ */
     public static void logging_out()
     {
         System.out.println("\033[1;32m"); 
@@ -122,7 +148,10 @@ public class ASCIIArt{
 
     }
 
-
+    /**
+ * Displays an ASCII art image with a red color using ANSI escape codes.
+ * The image is printed to the console and consists of a pattern or graphic made up of various characters.
+ */
     public static void image3() {
                         System.out.println("\033[1;31m");
                             System.err.println(
@@ -161,7 +190,12 @@ public class ASCIIArt{
                     }
                     
 
-
+    /**
+ * Prints a complex pattern of Unicode characters to the console, 
+ * including colored blocks and symbols, to display a stylized image.
+ * The image is made up of various emojis and Unicode characters to create an artistic display.
+ * The method uses a mix of colors and patterns to generate a visual effect in the console.
+ */
     public static void image()
     {
         System.out.println("⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛️⬛⬛️⬜️⬜️⬜️⬜️⬜⬜️⬜️️");
@@ -186,6 +220,12 @@ public class ASCIIArt{
         System.out.println("⬜️⬜️🟪🟪🟪🟪🟪🟪🟪🟪⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️🟪🟪🟪🟪🟪⬛️⬛️⬛️⬛⬜️⬜️⬛️⬛️⬛️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬛️⬛️⬛️⬜️⬜️⬛️⬛️⬜️⬜️⬜️⬜️⬜️️️");
             
     }
+
+  /**
+* Prints a special acknowledgment message thanking a list of individuals.
+* The method displays the list of people in a formatted way and includes
+* a visual acknowledgment image, followed by a thank you message in blue text.
+*/
     public static void acknowledment()
     {
         String[] thanksList = 
@@ -216,7 +256,9 @@ public class ASCIIArt{
     }
 
 
-
+/**
+* Prints a special acknowledgment image of the instructor
+*/
     public static void image2(){
         System.out.println("                                                     .:jEgDRQRbEMMgMgDZQZRBMgBBK:.");
 System.out.println("                                                       :vbRBBBQZDBQBRZgQMRRBdPgMqEDgEdQQQBgZv:");
