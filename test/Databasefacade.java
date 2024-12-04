@@ -28,7 +28,7 @@ public class Databasefacade{
     }
 
     /**
-     *  Checks if a username exists in the database.
+     * Checks if a username exists in the database.
      * @param username the username to check.
      * @return `true` if the username exists, otherwise `false`.
      */
@@ -54,6 +54,12 @@ public class Databasefacade{
         return exists;
     }
 
+    /**
+     * Hashes a password using the SHA-256 algorithm with a salt.
+     * @param password the plain-text password to hash.
+     * @param salt the salt to use for hashing.
+     * @return the hashed password as a hexadecimal string.
+     */
     public static String hashPassword(String password, String salt) {
         try {
             String saltedPassword = password + salt;
@@ -72,6 +78,13 @@ public class Databasefacade{
         }
     }
 
+    /**
+     * Verifies if an entered password matches the stored hash.
+     * @param enteredPassword the plain-text password entered by the user
+     * @param storedHash the stored hashed password from the database
+     * @param salt the salt used for hashing the stored password
+     * @return `true` if the entered password matches the stored hash, otherwise `false`.
+     */
     public static boolean verifyPassword(String enteredPassword, String storedHash, String salt) 
     {
         String enteredHash = hashPassword(enteredPassword, salt);
