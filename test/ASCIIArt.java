@@ -1,8 +1,8 @@
 package test;
 
 /**
- * Displays an ASCII art introduction message for the project
- * Displays various messages to the user
+ * This class contains methods that print project introduction messages and 
+ * stylized ASCII art headers to the console with color formatting
  */
 public class ASCIIArt{
     /**
