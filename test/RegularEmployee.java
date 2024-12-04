@@ -3,12 +3,21 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * Represents a regular employee in the system, inheriting from the `Employee` class.
+ * Allows regular employees with access to basic employee attributes.
+ */
 public class RegularEmployee extends Employee 
 {
 	
 	private static Scanner scan = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 
 
+/**
+     * Default constructor for the `RegularEmployee` class.
+     * Initializes a `RegularEmployee` with default values for all attributes.
+     * Used when creating a regular employee with default placeholder data.
+     */
     public RegularEmployee()
     {
         this.username = "username";
@@ -17,14 +26,37 @@ public class RegularEmployee extends Employee
         this.surname = "surname";
     }
 
+/**
+     * Parameterized constructor for the `RegularEmployee` class.
+     * @param employeeId the employee's unique ID.
+     * @param username the employee's username.
+     * @param password the employee's password.
+     * @param name the employee's name.
+     * @param surname the employee's surname.
+     * @param phoneNo the employee's phone number.
+     * @param role the employee's role.
+     * @param dateOfBirth the employee's date of birth.
+     * @param dateOfStart the date the employee started working.
+     * @param email the employee's email address.
+     */
     public RegularEmployee(int employeeId, String username, String password, String name, String surname, String phoneNo,String role, java.sql.Date dateOfBirth, java.sql.Date dateOfStart, String email) {
         super(employeeId, username, password, name, surname, phoneNo,role, dateOfBirth, dateOfStart, email);
     }
-    
+
+	/**
+     * Gets the role of the employee.
+     * @return the employee's role.
+     */
     @Override
     public String getRole() {
         return this.role;
     }
+
+/**
+     * Displays the regular employee menu and allows the user to make a selection.
+     * Includes display profile, update profile and logout options.
+     * @param user the employee currently logged in.
+     */
     public static void displayRegularMenu(Employee user) 
     {
         
@@ -71,14 +103,25 @@ public class RegularEmployee extends Employee
             }
         }
     }
-    
+
+	/**
+     * Displays basic profile information of the user.
+     * Includes role, email and phone number.
+     * @param user the employee whose profile information is displayed.
+     */
     public static void displayProfile(Employee user) 
     {
         System.out.println("=== "+ user.getRole() + " "+ user.getName()+" "+ user.getSurname() + " ===");
     	System.out.println("Email: " + user.email);
         System.out.println("Phone: " + user.phoneNo);
     }
-    
+
+	/**
+     * Allows the user to update their profile information.
+     * Includes password, phone number, email and return to menu options.
+     * Each option has specific validation rules.
+     * @param user the employee whose profile will be updated.
+     */
     public static void updateProfile(Employee user) 
     {
     	
@@ -220,7 +263,12 @@ public class RegularEmployee extends Employee
             }   
         }
     }
-    
+
+	/**
+     * Displays additional non-profile information of the logged in user.
+     * Includes employee ID, username, name, role, surname, employment dates and date of birth.
+     * @param user the employee whose non-personal details are displayed.
+     */
     public static void displayNonProfile(Employee user) 
     {
         
