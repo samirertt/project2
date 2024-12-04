@@ -8,7 +8,7 @@ import java.util.*;
 
 /**
  * Represents a Manager, inheriting from the Employee class.
- * Includes hiring, firing, updating employee information, and running algorithms.
+ * Includes displaying, hiring, firing, updating employee information, and running algorithms.
  */
 public class Manager extends Employee 
 {
