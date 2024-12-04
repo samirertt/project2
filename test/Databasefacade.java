@@ -27,6 +27,11 @@ public class Databasefacade{
         return connection;
     }
 
+    /**
+     *  Checks if a username exists in the database.
+     * @param username the username to check.
+     * @return `true` if the username exists, otherwise `false`.
+     */
     public static boolean usernameCheck(String username)
     {
         Connection connect = connection();
@@ -74,7 +79,10 @@ public class Databasefacade{
         return flag;
 
     }
-
+    /**
+     * Generates a random salt value.
+     * @return a randomly generated 16-byte salt as a hexadecimal string.
+     */
     public static String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] saltBytes = new byte[16];
@@ -86,7 +94,13 @@ public class Databasefacade{
         }
         return sb.toString();
     }
-    
+    /**
+     * Retrieves an employee by their username and password.
+     * @param username the employee's username.
+     * @param password the employee's password.
+     * @return 'Employee' object containing employee details, null if not found
+     * @throws SQLException If a database access error occurs.
+     */
     public Employee getEmployee(String username, String password) throws SQLException 
     {
         Connection connect = connection();
@@ -137,6 +151,10 @@ public class Databasefacade{
         }
         return null;
     }
+    /**
+     * Inserts a new employee's detail into the database.
+     * @param employee the `Employee` object containing the employee's details.
+     */
     public static void insertEmployee(Employee employee)
     {
         String profileSQL = "INSERT INTO profile (phone_no, password, e_mail, salt) VALUES (?, ?, ?, ?)";
@@ -166,7 +184,13 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
-   
+
+    /**
+     * Updates the username of an employee in the `non_profile` table.
+     * If the username violates any constraint an exception is thrown by the database.
+     * @param employeeId the ID of the employee whose username will be updated
+     * @param username the new username to set.
+     */
     public static void updateUsername(int employeeId, String username) {
         String sql = "UPDATE non_profile SET username = ? WHERE employee_id = ?";
         try {
@@ -179,6 +203,12 @@ public class Databasefacade{
         }
     }
 
+    /**
+     * Updates the hashed password of an employee in the database.
+     * If the password violates any constraints, an exception is thrown by the database.
+     * @param employeeId the ID of the employee whose password will be updated
+     * @param password the new password to set.
+     */
     public static void updatePassword(int employeeId, String password)
     {
         String sql = "UPDATE profile SET password = ? WHERE employee_id = ?";
@@ -194,7 +224,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Retrieves the hashed password of an employee based on their username.
+     * @param username the username of the employee
+     * @return the hashed password as a string, or `null` if the username is not found.
+     */
     public static String getPassword(String username)
     {
         Connection connect = connection();
@@ -222,6 +256,12 @@ public class Databasefacade{
         return null;
     }
     }
+    /**
+     * Updates the hashed password of an employee in the database.
+     * @param employeeId the ID of the employee whose password will be updated.
+     * @param password the new hashed password to set.
+     * @param salt the salt value to store with the password.
+     */
     public static void updatePassword(int employeeId, String password, String salt)
     {
         String sql = "UPDATE profile SET password = ? WHERE employee_id = ?";
@@ -235,7 +275,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Retrieves the salt value associated with an employee's username.
+     * @param username the username of the employee.
+     * @return the salt value as a string, or `null` if the username is not found.
+     */
     public static String getSalt(String username) {
         String sql = """
             SELECT p.salt
@@ -262,7 +306,11 @@ public class Databasefacade{
         }
     }
 
-
+    /**
+     * Sets a new salt value for the given username in the database.
+     * If there is no username, no changes will be made and a message will be printed.
+     * @param username the username for which the salt will be updated.
+     */
     public static void setSalt(String username) {
         String sql = """
             UPDATE profile AS p
@@ -288,7 +336,12 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates the role of an employee in the database.
+     * If the employee ID does not exist, no changes will be made.
+     * @param employeeId the ID of the employee whose role will be updated.
+     * @param role the new role to set.
+     */
     public static void updateRole(int employeeId, String role) {
         String sql = "UPDATE non_profile SET role = ? WHERE employee_id = ?";
         try {
@@ -301,7 +354,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates the name of an employee in the database.
+     * @param employeeId the ID of the employee whose name will be updated
+     * @param name the new name to set
+     */  
     public static void updateName(int employeeId, String name) {
         String sql = "UPDATE non_profile SET name = ? WHERE employee_id = ?";
         try {
@@ -314,7 +371,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates the surname of an employee in the database.
+     * @param employeeId the ID of the employee whose surname will be updated.
+     * @param surname the new surname to set.
+     */
     public static void updateSurname(int employeeId, String surname) {
         String sql = "UPDATE non_profile SET surname = ? WHERE employee_id = ?";
         try {
@@ -327,7 +388,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates the phone number of an employee in the database.
+     * @param employeeId the ID of the employee whose phone number will be updated.
+     * @param phoneNo the new phone number to set.
+     */
     public static void updatePhoneNumber(int employeeId, String phoneNo) {
         String sql = "UPDATE profile SET phone_no = ? WHERE employee_id = ?";
         try {
@@ -340,7 +405,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates the email address of an employee in the database.
+     * @param employeeId the ID of the employee whose email address will be updated.
+     * @param email the new email address to set.
+     */
     public static void updateEmail(int employeeId, String email) {
         String sql = "UPDATE profile SET e_mail = ? WHERE employee_id = ?";
         try {
@@ -353,7 +422,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates the date of birth of an employee in the database.
+     * @param employeeId the ID of the employee whose date of birth will be updated.
+     * @param dateOfBirth the new date of birth to set.
+     */
     public static void updateDateOfBirth(int employeeId, java.sql.Date dateOfBirth) {
         String sql = "UPDATE non_profile SET dateofbirth = ? WHERE employee_id = ?";
         try {
@@ -366,7 +439,11 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-
+    /**
+     * Updates the start date of an employee in the database.
+     * @param employeeId the ID of the employee whose start date will be updated.
+     * @param dateOfStart the new start date to set.
+     */
     public static void updateDateOfStart(int employeeId, java.sql.Date dateOfStart) {
         String sql = "UPDATE non_profile SET dateofstart = ? WHERE employee_id = ?";
         try {
@@ -380,7 +457,10 @@ public class Databasefacade{
         }
     }
 
-    
+    /**
+     * Displays all employees from the `non_profile` table.
+     * If the query fails due to a database issue, an exception stack trace will be printed.
+     */
     public static void displayAllEmployees()
     {
         String sql_String = "SELECT * FROM non_profile";
@@ -418,7 +498,12 @@ public class Databasefacade{
         }
     } 
     
-
+    /**
+     * Displays all employees with a specific role from the database.
+     * Displays all employees matching the given role by combining the non-profile and profile tables.
+     * If no employees match the role, the output will be empty.
+     * @param role the role of the employees to display.
+     */
     public static void displayEmployeesWithRole(String role){
         String sql_query = """
                         SELECT np.employee_id, np.username, np.role, np.name, np.surname, np.dateofbirth, np.dateofstart,p.employee_id,p.phone_no, p.e_mail
@@ -461,7 +546,11 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
-
+    /**
+     * Displays details of an employee with a specific username.
+     * If no employees match the username, the message will be printed.
+     * @param username he username of the employee to display.
+     */
     public static void displayEmployeeWithUsername(String username) {
 
         String sql_query = """
@@ -526,7 +615,11 @@ public class Databasefacade{
             System.err.println("Error retrieving usernames from the database.");
         }
     }
-
+    /**
+     * Deletes an employee from the database based on their ID.
+     * Ensures consistency by first deleting data from the profile table and then from the non-profile table
+     * @param employeeId the ID of the employee to delete.
+     */
     public static void deleteEmployee(int employeeId) {
 
         String sqlDeleteProfile = "DELETE FROM profile WHERE employee_id = ?";
@@ -549,7 +642,10 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
-    
+    /**
+     * Closes the active database connection.
+     * @param connection the database connection to close.
+     */
     public void closeConnection(Connection connection)
     {
         try
@@ -562,7 +658,11 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
-
+     /**
+     * Retrieves employee details from database based on employee ID.
+     * @param employee_id the unique ID of the employee.
+     * @return An `Employee` object containing the employee's details, or `null` if the employee is not found.
+     */
     public static Employee getEmployee(int employee_id)
     {
         String sql_query = """
@@ -613,6 +713,11 @@ public class Databasefacade{
         return employee;
     }
 
+    /**
+     * Updates a CSV file with data and imports the data into a database table.
+     * @param csvFile the path to the CSV file to be updated and imported.
+     * @param data an integer array containing the data to write into the CSV file.
+     */
     public static void updateCSV(String csvFile, int[] data) {
 
         
