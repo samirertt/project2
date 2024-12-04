@@ -9,7 +9,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
-// NOTE IF NOT EMPLOYEE PRESENT SEND EXCEPTION
 /**
  * The `Databasefacade` class provides a unified interface for interacting with the database.
  * This class includes methods for establishing a connection, performing CRUD operations, verifying and hashing passwords, and generating salts for enhanced security
@@ -534,21 +533,18 @@ public class Databasefacade{
             prepared_Statement.setString(1, role);                  
             ResultSet resultSet = prepared_Statement.executeQuery();
 
-            // get ResultSet's meta data
             ResultSetMetaData metaData = resultSet.getMetaData();
             int numberOfColumns = metaData.getColumnCount();     
             
             System.out.printf("Displaying Employees with Role:%n%n");
 
-            // display the names of the columns in the ResultSet
             for (int i = 1; i <= numberOfColumns; i++) 
             {
                 System.out.printf("\u001B[34m%-15s\u001B[0m\t", metaData.getColumnName(i));
             }
             System.out.println();
-            System.out.println("-".repeat(numberOfColumns * 17)); // Adjust separator length dynamically
+            System.out.println("-".repeat(numberOfColumns * 17)); 
             
-            // display query results
             while (resultSet.next()) 
             {
                 for (int i = 1; i <= numberOfColumns; i++) 
@@ -815,6 +811,13 @@ public class Databasefacade{
         }
     }
 
+    /**
+     * Clears the specified table by truncating it. This operation deletes all rows
+     * from the table without removing the table structure.
+     *
+     * @param SortedArrays The name of the table to be cleared. This should be a valid 
+     *                     table name in the database.
+     */
     public static void clearTable(String SortedArrays) {
         String truncateSQL = "TRUNCATE TABLE " + SortedArrays;
 
