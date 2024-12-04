@@ -10,6 +10,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 // NOTE IF NOT EMPLOYEE PRESENT SEND EXCEPTION
+/**
+ * The `Databasefacade` class provides a unified interface for interacting with the database.
+ * This class includes methods for establishing a connection, performing CRUD operations, verifying and hashing passwords, and generating salts for enhanced security
+ */
 public class Databasefacade{
     
     private static Connection connection;
