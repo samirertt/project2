@@ -6,6 +6,10 @@ import java.nio.charset.StandardCharsets;
 import java.sql.Date; 
 import java.util.*;
 
+/**
+ * Represents a Manager, inheriting from the Employee class.
+ * Includes hiring, firing, updating employee information, and running algorithms.
+ */
 public class Manager extends Employee 
 {
     private static Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
@@ -13,6 +17,10 @@ public class Manager extends Employee
 
     Databasefacade db = new Databasefacade();
 
+    /**
+    * Default constructor for the Manager class.
+    * Creates a manager with default properties.
+    */
     public Manager()
     {
         this.username = "username";
@@ -22,16 +30,36 @@ public class Manager extends Employee
         this.role ="Manager";
     }
     
+    /**
+     * Parameterized constructor for the Manager class.
+     * @param employeeId the unique ID of the manager
+     * @param username the manager's username
+     * @param password the manager's password
+     * @param name the manager's first name
+     * @param surname the manager's last name
+     * @param phoneNumber the manager's phone number
+     * @param role the role of the manager
+     * @param dateOfBirth the manager's date of birth
+     * @param dateOfStart the manager's start date
+     * @param email the manager's email address
+     */
     public Manager(int employeeId, String username, String password, String name, String surname, String phoneNumber,String role, java.sql.Date dateOfBirth, java.sql.Date dateOfStart, String email) 
     {
         super(employeeId, username, password, name, surname, phoneNumber,role, dateOfBirth, dateOfStart, email);
     }
 
+    /**
+     * @return the role of the employee as "Manager".
+     */
     @Override
     public String getRole() {
         return "Manager";
     }
-
+    /**
+     * Displays the Manager menu.
+     * Performs manager-specific operations.
+     * @param user logged-in manager.
+     */
     public static void managerMenu(Employee user)
     {
         boolean flag=true;
@@ -99,7 +127,13 @@ public class Manager extends Employee
         }
         scanner.close();
     }
-
+    
+    /**
+     * Updates the manager's own profile.
+     * Including password, phone number, email,username, name, surname, date of birth, and start date.
+     * Each field has specific validation rules.
+     * @param user the manager whose profile is being updated
+     */
     public static void updateProfile(Employee user)
     {
         Project2.flush_terminal();
@@ -446,6 +480,10 @@ public class Manager extends Employee
         }
     }
 
+    /**
+     * Displays the menu to view employees' information.
+     * Options include viewing all employees, employees by role, and employees by username and return to the manager menu.
+     */
     public static void displayMenu()
     {
         while(true)
@@ -554,6 +592,11 @@ public class Manager extends Employee
         }
     }
 
+    /**
+     * Updates the information of an employee based on the manager's selection.
+     * Options include updating password, phone number, email, username, name, surname, date of birth, start date and return main menu.
+     * Each field has specific validation rules.
+     */
     public static void updateEmployee()
     {
         while(true)
@@ -808,6 +851,10 @@ public class Manager extends Employee
         }
     }
     
+    /**
+     * Allows the manager to hire a new employee.
+     * The manager can specify the role of the employee and fill out their information.
+     */
     public static void hireEmployee()
     {
         Employee person=null;
@@ -1059,6 +1106,11 @@ public class Manager extends Employee
     
     }
     
+    /**
+     * Allows the manager to fire an employee.
+     * The Manager selects the employee to be removed from the system by ID.
+     * @param userID the ID of the currently logged-in manager to prevent self-firing.
+     */
     public static void fireEmployee(int userID)
     {
         Project2.flush_terminal();
@@ -1090,6 +1142,12 @@ public class Manager extends Employee
         Databasefacade.deleteEmployee(id);
     }
 
+    /**
+     * Provides a menu to run various sorting algorithms and analyze their performance.
+     * Allows the manager to test sorting algorithms, measure execution times, and compare results.
+     * Includes Radix Sort, Shell Sort, Heap Sort, and Insertion Sort algorithms.
+     * Saves sorted datasets to CSV files.
+     */
     public static void algorithmMenu()
     {
 
