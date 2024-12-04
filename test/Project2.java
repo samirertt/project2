@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 
-
 public class Project2 
 {
     private static Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
@@ -23,13 +22,13 @@ public class Project2
             while(true)
             {
                 ASCIIArt.display_welcome_msg();
-                System.out.println("\n*************************************");
-                System.out.println("*                                     *");
-                System.out.println("*         [A] Login                   *");
-                System.out.println("*         [B] Terminate               *");
-                System.out.println("*         [C] Special Acknowledments  *");
-                System.out.println("*                                     *");
-                System.out.println("***************************************");
+                System.out.println("\n********************************************");
+                System.out.println("*                                            *");
+                System.out.println("*         [A] Login                          *");
+                System.out.println("*         [B] Terminate                      *");
+                System.out.println("*         [C] Special Acknowledgements       *");
+                System.out.println("*                                            *");
+                System.out.println("**********************************************");
                 System.out.print("Please make a choice: ");
 
                 String choice = scanner.nextLine().toUpperCase();
@@ -45,6 +44,7 @@ public class Project2
                         return; 
                     case "C":
                         flush_terminal();
+                        System.out.println("\u001B[34m%-15s\u001B[0m\t"); 
                         ASCIIArt.acknowledment();
                         break;
                     default:
@@ -89,7 +89,6 @@ public class Project2
                 continue;
             }
             
-            // Check if the password is "pass123" and ask for a new password
             if(user.getPassword().equals("pass123"))
             {
                 while(true)
@@ -139,7 +138,6 @@ public class Project2
                 }
             }
 
-            // Check the user's role and display the appropriate menu
             String role = user.getRole();
 
             if(role.equals("Manager"))
@@ -181,7 +179,6 @@ public class Project2
         {
             String operatingSystem = System.getProperty("os.name"); 
             if (operatingSystem.contains("Windows")) 
-                // Clear terminal for Windows
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             else 
                 new ProcessBuilder("bash","-c","clear").inheritIO().start().waitFor();
@@ -193,4 +190,3 @@ public class Project2
         //System.out.print("\033[H\033[2J");
         //System.out.flush();  
     }
-

@@ -6,8 +6,7 @@ import java.util.Collections;
 
 /**
  * This class includes methods to initialize the dataset,
- * Finds the maximum value in an array
- * Sorts the dataset using the Radix Sort algorithm
+ * Sorts the dataset using the Radix Sort, Shell ort, Insertion Sort,
  */
 public class sortingAlgorithms 
 {

@@ -4,12 +4,10 @@ package test;
 
 abstract class Employee 
 {
-    //Profile
     public String password;
     public String phoneNo;
     public String email;
 
-    //Non-profile
     public int employeeId;
     public String username;
     public String name;
@@ -26,7 +24,7 @@ abstract class Employee
         this.dateOfStart = null;
         this.dateOfBirth = null;
     }
-    //constructor
+
     public Employee(int employeeId, String username, String password,
                     String name, String surname, String phoneNo,String role, java.sql.Date  dateOfBirth,
                     java.sql.Date  dateOfStart, String email) {
@@ -42,7 +40,6 @@ abstract class Employee
         this.email = email;
     }
 
-    //getters and setters
     public int getEmployeeId()
     {
         return employeeId;

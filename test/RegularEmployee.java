@@ -52,10 +52,11 @@ public class RegularEmployee extends Employee
                     updateProfile(user);
                     break;
                 case "C":
-                    System.out.println("Logging out...");
+                    ASCIIArt.logging_out();
+                    ASCIIArt.image();
                     try
                     {
-                        Thread.sleep(1500);
+                        Thread.sleep(2500);
                     }
                     catch (InterruptedException e)
                     {
@@ -77,8 +78,6 @@ public class RegularEmployee extends Employee
     	System.out.println("Email: " + user.email);
         System.out.println("Phone: " + user.phoneNo);
     }
-    
-    
     
     public static void updateProfile(Employee user) 
     {

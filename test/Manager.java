@@ -78,10 +78,11 @@ public class Manager extends Employee
                     algorithmMenu();
                     break;
                 case "G":
-                    System.out.println("Logging out...");
+                    ASCIIArt.logging_out();
+                    ASCIIArt.image();
                     try
                     {
-                        Thread.sleep(1500);
+                        Thread.sleep(2500);
                     }
                     catch (InterruptedException e)
                     {
@@ -400,6 +401,14 @@ public class Manager extends Employee
                                 System.out.println("Start date cannot be in the future.");
                                 continue;
                             }
+
+                            if(startDate.isBefore(user.getDateOfBirth().toLocalDate()))
+                            {
+                                Project2.flush_terminal();
+                                System.out.println("Start date can't be before the birth date.");
+                                continue;
+                            }
+
                             Date sqlStartDate = Date.valueOf(startDate);
                             user.setDateOfStart(sqlStartDate);
                             Databasefacade.updateDateOfStart(user.getEmployeeId(),user.getDateOfStart());
@@ -545,7 +554,6 @@ public class Manager extends Employee
         }
     }
 
-    
     public static void updateEmployee()
     {
         while(true)
@@ -754,6 +762,14 @@ public class Manager extends Employee
                                     System.out.println("Start date cannot be in the future.");
                                     continue;
                                 }
+
+                                if (startDate.isBefore(person.getDateOfBirth().toLocalDate()))
+                                {
+                                    Project2.flush_terminal();
+                                    System.out.println("Start date can't be before the birth date.");
+                                    continue;
+                                }
+
                                 Date sqlStartDate = Date.valueOf(startDate);
                                 person.setDateOfStart(sqlStartDate);
                                 Databasefacade.updateDateOfStart(person.getEmployeeId(),person.getDateOfStart());
@@ -845,9 +861,17 @@ public class Manager extends Employee
         Project2.flush_terminal();
         while(true)
         {
+            System.out.println("Write q to return to the manager menu.");
             System.out.println("Username can only contain letters, numbers, and underscores.");
             System.out.print("Please write the username of the new employee:");
             String username = scanner.nextLine();
+
+            if(username.equals("q"))
+            {
+                Project2.flush_terminal();
+                System.out.println("Returning to the manager menu...");
+                return;
+            }
             
             if(Databasefacade.usernameCheck(username))
             {
@@ -875,8 +899,16 @@ public class Manager extends Employee
         
         while(true)
         { 
+            System.out.println("Write q to return to the manager menu.");
             System.out.print("Please write the name of the new employee:");
             String newName = scanner.nextLine();
+
+            if(newName.equals("q"))
+            {
+                Project2.flush_terminal();
+                System.out.println("Returning to the manager menu...");
+                return;
+            }
             
             if (newName == null || newName.trim().isEmpty()) 
             {
@@ -891,15 +923,25 @@ public class Manager extends Employee
 
             newName = newName.substring(0, 1).toUpperCase() + newName.substring(1);
             person.setName(newName);
+            Project2.flush_terminal();
             System.out.println("Name set succesfully!");
             break;
         }
         
         while(true)
         {
+            System.out.println("Write q to return to the manager menu.");
             System.out.print("Please write the surname of the new employee:");
             String surname = scanner.nextLine();
             String regex = "^[a-zA-Z'çÇğĞıİöÖşŞüÜ]+$";
+
+            if(surname.equals("q"))
+            {
+                Project2.flush_terminal();
+                System.out.println("Returning to the manager menu...");
+                return;
+            }
+
             if (surname == null || surname.trim().isEmpty()) 
             {
                 Project2.flush_terminal();
@@ -920,11 +962,19 @@ public class Manager extends Employee
             break;
         }
         
-
         while(true)
         {
+            System.out.println("Write q to return to the manager menu.");
             System.out.print("Please write the date of birth of the new employee (yyyy-MM-dd):");
             String start = scanner.nextLine();
+
+            if(start.equals("q"))
+            {
+                Project2.flush_terminal();
+                System.out.println("Returning to the manager menu...");
+                return;
+            }
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             try 
             {
@@ -960,8 +1010,17 @@ public class Manager extends Employee
 
         while(true)
         {
+            System.out.println("Write q to return to the manager menu.");
             System.out.print("Please write the date of start of the new employee(yyyy-MM-dd):");
             String start = scanner.nextLine();
+
+            if(start.equals("q"))
+            {
+                Project2.flush_terminal();
+                System.out.println("Returning to the manager menu...");
+                return;
+            } 
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             try 
             {
@@ -972,6 +1031,14 @@ public class Manager extends Employee
                     System.out.println("Start date cannot be in the future.");
                     continue;
                 }
+
+                if (startDate.isBefore(person.getDateOfBirth().toLocalDate()))
+                {
+                    Project2.flush_terminal();
+                    System.out.println("Start date can't be before the birth date.");
+                    continue;
+                }
+
                 Date sqlStartDate = Date.valueOf(startDate);
                 person.setDateOfStart(sqlStartDate);
                 Databasefacade.updateDateOfStart(person.getEmployeeId(),person.getDateOfStart());
@@ -987,6 +1054,7 @@ public class Manager extends Employee
             }
         }
         Databasefacade.insertEmployee(person);
+        Project2.flush_terminal();
         System.out.println("New employee added successfully!");
     
     }
@@ -1113,4 +1181,3 @@ public class Manager extends Employee
         System.out.println("-------------------------------");
     }
 }
-

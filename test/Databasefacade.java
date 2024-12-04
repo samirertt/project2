@@ -67,7 +67,6 @@ public class Databasefacade{
         }
     }
 
-
     public static boolean verifyPassword(String enteredPassword, String storedHash, String salt) 
     {
         String enteredHash = hashPassword(enteredPassword, salt);
@@ -75,7 +74,6 @@ public class Databasefacade{
         return flag;
 
     }
-
 
     public static String generateSalt() {
         SecureRandom random = new SecureRandom();
@@ -146,15 +144,13 @@ public class Databasefacade{
         
         try
         {
-            // Insert into profile table
             PreparedStatement preparedStatementProfile = connection.prepareStatement(profileSQL);
             preparedStatementProfile.setString(1, employee.getPhoneNo()); 
-            preparedStatementProfile.setString(2, employee.getPassword()); // Assuming the employee object has a password field
+            preparedStatementProfile.setString(2, employee.getPassword()); 
             preparedStatementProfile.setString(3, employee.getEmail()); 
             preparedStatementProfile.setString(4, generateSalt());
             preparedStatementProfile.executeUpdate();
             
-            // Insert into non_profile table
             PreparedStatement preparedStatementNonProfile = connection.prepareStatement(nonProfileSQL);
             preparedStatementNonProfile.setString(1, employee.getUsername()); 
             preparedStatementNonProfile.setString(2, employee.getRole()); 
@@ -170,9 +166,7 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
-
-
-//degisecek        
+   
     public static void updateUsername(int employeeId, String username) {
         String sql = "UPDATE non_profile SET username = ? WHERE employee_id = ?";
         try {
@@ -185,7 +179,6 @@ public class Databasefacade{
         }
     }
 
-    //hash ekle!!!!
     public static void updatePassword(int employeeId, String password)
     {
         String sql = "UPDATE profile SET password = ? WHERE employee_id = ?";
@@ -212,12 +205,13 @@ public class Databasefacade{
         ON p.employee_id = np.employee_id
         WHERE np.username = ?
         """;
+
         try (PreparedStatement preparedStatement = connect.prepareStatement(sql)) {
-            preparedStatement.setString(1, username); // Set the username parameter
+            preparedStatement.setString(1, username); 
 
         try (ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
-                return resultSet.getString("password"); // Return the password
+                return resultSet.getString("password"); 
             } else {
                 System.out.println("No matching username found.");
                 return null;
@@ -249,14 +243,14 @@ public class Databasefacade{
             INNER JOIN non_profile AS np
             ON p.employee_id = np.employee_id
             WHERE np.username = ?
-        """;
+            """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, username); // Set the username parameter
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) { // Move to the first row
-                    return resultSet.getString("salt"); // Get the salt value
+                if (resultSet.next()) { 
+                    return resultSet.getString("salt"); 
                 } else {
                     System.out.println("No salt found for username: " + username);
                     return null;

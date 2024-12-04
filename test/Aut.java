@@ -12,7 +12,6 @@ public class Aut
 
     public Employee authenticate(String username, String password) throws SQLException
     {
-        //kullanıcı adı var mı
         if(!Databasefacade.usernameCheck(username))
         {
             return null;
@@ -35,4 +34,3 @@ public class Aut
         return null;
     }
 } 
-
