@@ -5,7 +5,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
-
+/**
+ * Main class for the Project2.
+ * Manages user authentication, role-based menu display, and program termination.
+ * Includes helper methods for clearing the terminal screen and managing interactions with the database.
+ */
 public class Project2 
 {
     private static Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
@@ -60,7 +64,13 @@ public class Project2
         }
         scanner.close();
     } 
-    
+
+     /**
+     * Manages the login and menu navigation process for authenticated users based on their role.
+     * User navigate to Regular employee menu or Manager menu depending on their role.
+     * Users with default passwords are required to update them before proceeding.
+     * @param auth the authentication system for verifying user credentials.
+     */
     public static void Menu(Aut auth)
     {
         Employee user = null;
@@ -88,7 +98,8 @@ public class Project2
                 e.printStackTrace();
                 continue;
             }
-            
+
+            // Check if the password is "pass123" and ask for a new password
             if(user.getPassword().equals("pass123"))
             {
                 while(true)
@@ -138,6 +149,7 @@ public class Project2
                 }
             }
 
+            // Check the user's role and display the appropriate menu
             String role = user.getRole();
 
             if(role.equals("Manager"))
@@ -173,6 +185,9 @@ public class Project2
         }
     }
 
+    /**
+     * Clears the terminal screen.
+     */
     public static void flush_terminal()
     {
         try 
