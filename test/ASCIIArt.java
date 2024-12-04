@@ -1,5 +1,9 @@
 package test;
 
+/**
+ * Displays an ASCII art introduction message for the project
+ * Displays various messages to the user
+ */
 public class ASCIIArt{
     /**
  * Displays an ASCII art introduction for the project with various colored sections.
