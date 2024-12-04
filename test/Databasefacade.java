@@ -18,7 +18,16 @@ public class Databasefacade{
     private static Connection connection;
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/Employees?useTimezone=true&serverTimezone=UTC";
     
-    
+    /**
+     * Establishes a connection to the database using the specified URL and credentials.
+     * 
+     * <p>This method attempts to connect to the database using the JDBC DriverManager. 
+     * If the connection is successful, it returns the established connection. 
+     * If an error occurs, the SQLException is caught, its stack trace is printed, 
+     * and the method returns the connection (which may be null if the connection fails).
+     * 
+     * @return the established {@link Connection} object if successful, or null if the connection fails.
+     */
     public static Connection connection() 
     {
         try {
@@ -95,6 +104,7 @@ public class Databasefacade{
         return flag;
 
     }
+    
     /**
      * Generates a random salt value.
      * @return a randomly generated 16-byte salt as a hexadecimal string.
@@ -110,6 +120,7 @@ public class Databasefacade{
         }
         return sb.toString();
     }
+    
     /**
      * Retrieves an employee by their username and password.
      * @param username the employee's username.
@@ -167,6 +178,7 @@ public class Databasefacade{
         }
         return null;
     }
+    
     /**
      * Inserts a new employee's detail into the database.
      * @param employee the `Employee` object containing the employee's details.
@@ -240,6 +252,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Retrieves the hashed password of an employee based on their username.
      * @param username the username of the employee
@@ -272,6 +285,7 @@ public class Databasefacade{
         return null;
     }
     }
+    
     /**
      * Updates the hashed password of an employee in the database.
      * @param employeeId the ID of the employee whose password will be updated.
@@ -291,6 +305,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Retrieves the salt value associated with an employee's username.
      * @param username the username of the employee.
@@ -352,6 +367,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Updates the role of an employee in the database.
      * If the employee ID does not exist, no changes will be made.
@@ -370,6 +386,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Updates the name of an employee in the database.
      * @param employeeId the ID of the employee whose name will be updated
@@ -387,6 +404,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Updates the surname of an employee in the database.
      * @param employeeId the ID of the employee whose surname will be updated.
@@ -404,6 +422,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Updates the phone number of an employee in the database.
      * @param employeeId the ID of the employee whose phone number will be updated.
@@ -421,6 +440,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Updates the email address of an employee in the database.
      * @param employeeId the ID of the employee whose email address will be updated.
@@ -438,6 +458,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Updates the date of birth of an employee in the database.
      * @param employeeId the ID of the employee whose date of birth will be updated.
@@ -455,6 +476,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Updates the start date of an employee in the database.
      * @param employeeId the ID of the employee whose start date will be updated.
@@ -559,6 +581,7 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
+    
     /**
      * Displays details of an employee with a specific username.
      * If no employees match the username, the message will be printed.
@@ -607,6 +630,7 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
+    
     /**
     * Fetches and displays all usernames from the `non_profile` table.
     *Prints a list of usernames retrieved from the database.
@@ -631,6 +655,7 @@ public class Databasefacade{
             System.err.println("Error retrieving usernames from the database.");
         }
     }
+    
     /**
      * Deletes an employee from the database based on their ID.
      * Ensures consistency by first deleting data from the profile table and then from the non-profile table
@@ -658,6 +683,7 @@ public class Databasefacade{
             e.printStackTrace();
         }
     }
+    
     /**
      * Closes the active database connection.
      * @param connection the database connection to close.
@@ -674,6 +700,7 @@ public class Databasefacade{
             sqlException.printStackTrace();
         }
     }
+    
      /**
      * Retrieves employee details from database based on employee ID.
      * @param employee_id the unique ID of the employee.
