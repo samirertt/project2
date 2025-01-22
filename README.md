@@ -1,0 +1,1 @@
+This project is a console-based application developed to simulate a firm management system. It includes role-based access control for Managers and Regular Employees, with features such as employee management, profile updates, and sorting algorithm analysis.
